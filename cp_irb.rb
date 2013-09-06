@@ -16,12 +16,8 @@ module IRB # :nodoc:
 
     @CONF[:IRB_RC].call(irb.context) if @CONF[:IRB_RC]
     @CONF[:MAIN_CONTEXT] = irb.context
-
     catch(:IRB_EXIT) do
       irb.eval_input
     end
   end
 end
-
-puts "CloudPassage API Ruby Command Line Interface"
-puts "********************************************"
