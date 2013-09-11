@@ -5,8 +5,8 @@ class CpSession
     client = OAuth2::Client.new(CLIENTID,
                                 CLIENTSECRET,
                                 :site => "https://#{HOST}",
-                                :token_url => '/oauth/access_token',
-                                :ssl => {:verify => false})
+                                :token_url => '/oauth/access_token')
+
 
     @token = client.client_credentials.get_token.token
     @api_url = "https://#{HOST}/v1/"
