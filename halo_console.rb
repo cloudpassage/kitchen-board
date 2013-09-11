@@ -1,12 +1,16 @@
 #!/usr/bin/env ruby
+
 require 'rest-client'
 require 'oauth2'
 require 'json'
 require 'awesome_print'
-require_relative 'cp_config'
-require_relative 'cp_response'
-require_relative 'cp_session'
-require_relative 'cp_irb.rb'
+
+$:<< File.join(File.dirname(__FILE__), './lib')
+
+require 'cp_config'
+require 'cp_response'
+require 'cp_session'
+require 'cp_irb.rb'
 
 
 puts "CloudPassage API Ruby Command Line Interface"
