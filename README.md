@@ -37,12 +37,14 @@ launch locally as :
 
 if all is set up correctly you will see the following prompt
 
+```
 CloudPassage API Ruby Command Line Interface
 ********************************************
  Now you can call cp.get and so on 
 #<CpSession:<object hash>
 
-2.0.0p195 :001 >` 
+2.0.0p195 :001 >
+```
 
 
 ####Usage
