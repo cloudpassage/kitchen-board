@@ -1,8 +1,7 @@
-###kitchen-board
+### halo api console
 
 (WARNING : Sharp Tools May Cut: Use at your own risk.)
-Version: *1.0*
-<br />
+
 Author: "Alfonso Adriasola" - "aadriasola@gmail.com"
 
 Ruby console with a CloudPassage api session going
@@ -37,6 +36,7 @@ launch locally as :
 
 if all is set up correctly you will see the following prompt
 
+
 ```
 CloudPassage API Ruby Command Line Interface
 ********************************************
@@ -56,11 +56,14 @@ for json, or `to_hash` to get into a Ruby hash format
 
 #####*Example Commands*
 
+```
 cp.get(:fim_policies)
 
 cp.get(:groups).jpp
 
 cp.get "fim_policies/put_an_id_in_here"
+
+```
 
 For PUT and POST actions, parameters can be supplied as a JSON,
 this will be handled by RestClient and submitted the right way
@@ -69,10 +72,11 @@ For example:
 
 given a file integrity policy "file.json" you could execute
 
+```
 my_json_policy = File.read("file.json")
 
 cp.post "fim_policies", my_json_policy
-
+```
 
 #####* Output*
 
