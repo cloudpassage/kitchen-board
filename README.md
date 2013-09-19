@@ -14,7 +14,7 @@ Ruby console with a CloudPassage api session going
 
 ##Installation 
 
-clone the git repo, 
+Clone, download, or fork the git repo, then configure as below.
 
 
 ###Configuration
