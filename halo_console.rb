@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'rest-client'
-require 'oauth2'
-require 'json'
 require 'awesome_print'
 
 $:<< File.join(File.dirname(__FILE__), './lib')

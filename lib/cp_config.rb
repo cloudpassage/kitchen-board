@@ -1,3 +1,7 @@
+require 'rest-client'
+require 'oauth2'
+require 'json'
+
 module CpConfig
 
   CLIENTID = ENV['HALO_KEY_ID'] || "invalid"
