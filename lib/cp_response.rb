@@ -12,7 +12,7 @@ class CpResponse
     JSON.parse(@result)
   end
  
-  def raw
+  def to_s
     @result
   end
 

@@ -8,7 +8,7 @@ describe CpResponse do
 
   it "shows raw" do
     response = CpResponse.new('foo')
-    response.raw.should eq('foo')
+    response.to_s.should eq('foo')
   end
 
   it "should render a hash" do
