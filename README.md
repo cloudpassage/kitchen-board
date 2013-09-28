@@ -59,18 +59,18 @@ for json, or `to_hash` to get into a Ruby hash format
 ```
 cp.get(:fim_policies)
 
-cp.get(:groups).jpp
+cp.get(:groups).to_hash
 
-cp.get "fim_policies/put_an_id_in_here"
+puts cp.get("fim_policies/{id}").pretty
 
 ```
 
-For PUT and POST actions, parameters can be supplied as a JSON,
+For PUT and POST actions, parameters can be supplied as JSON,
 this will be handled by RestClient and submitted the right way
 
 *For example:*
 
-given a file integrity policy "file.json" you could execute
+Given a correctly formatted json file of a file integrity policy "file.json" you could execute
 
 ```
 my_json_policy = File.read("file.json")
