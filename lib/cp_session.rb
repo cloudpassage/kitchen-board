@@ -16,20 +16,20 @@ class CpSession
   end
 
   def get(endpoint)
-    CpResponse.new(RestClient.get @api_url+"#{endpoint}", @common)
+    CpResponse.new{RestClient.get @api_url+"#{endpoint}", @common}
   end
 
   def post(endpoint, params)
-    CpResponse.new(RestClient.post @api_url+"#{endpoint}", params, @common)
+    CpResponse.new{RestClient.post @api_url+"#{endpoint}", params, @common}
 
   end
 
   def put(endpoint, params)
-    CpResponse.new(RestClient.put @api_url+"#{endpoint}", params, @common)
+    CpResponse.new{RestClient.put @api_url+"#{endpoint}", params, @common}
   end
 
   def delete(endpoint)
-    CpResponse.new(RestClient.delete @api_url+"#{endpoint}", @common)
+    CpResponse.new{RestClient.delete @api_url+"#{endpoint}", @common}
   end
 
 end
