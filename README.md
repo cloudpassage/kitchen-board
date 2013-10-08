@@ -71,7 +71,7 @@ For PUT and POST actions, parameters can be supplied as JSON,
 this will be handled by RestClient and submitted the right way
 
 ```ruby
-cp.put "group/{id}", {group:{name:"load balancers"}
+cp.put "group/{id}", {group:{name:"load balancers"}.to_json
 ```
 Given a correctly formatted json file of a file integrity policy "file.json" you could execute
 
