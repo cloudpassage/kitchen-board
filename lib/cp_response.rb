@@ -1,7 +1,11 @@
 class CpResponse
 
-  def initialize (args)
-    @result = args
+  def initialize()
+    begin
+      @result = yield
+    rescue => e
+      @result = e
+    end
   end
 
   def pretty
@@ -11,7 +15,7 @@ class CpResponse
   def to_hash
     JSON.parse(@result)
   end
- 
+
   def to_s
     @result
   end
