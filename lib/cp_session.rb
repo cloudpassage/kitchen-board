@@ -15,7 +15,7 @@ class CpSession
 
   end
 
-  def get(endpoint, params)
+  def get(endpoint, params={})
     CpResponse.new{RestClient.get @api_url+"#{endpoint}", @common.merge(params:params)}
   end
 
