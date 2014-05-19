@@ -1,11 +1,8 @@
 class CpResponse
-
-  def initialize()
-    begin
-      @result = yield
-    rescue => e
-      @result = e
-    end
+  def initialize
+    @result = yield
+  rescue => e
+    @result = e
   end
 
   def pretty
@@ -17,7 +14,6 @@ class CpResponse
   end
 
   def to_s
-    @result
+    pretty
   end
-
 end
