@@ -1,9 +1,13 @@
 class CpResponse
   def initialize
-    @result = yield
-  rescue => e
-    @result = e
+    begin
+      @result = yield
+    rescue => e
+      @result = e
+    end
+    puts self.to_s
   end
+
 
   def pretty
     JSON.pretty_unparse(JSON.parse(@result))
