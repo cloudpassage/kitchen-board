@@ -17,4 +17,5 @@ cp = CpSession.new()
 puts " Now you can call cp.get and so on "
 puts "#{cp}"
 puts
+
 IRB.start_session(binding)

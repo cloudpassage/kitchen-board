@@ -2,6 +2,7 @@ require 'irb'
 
 module IRB # :nodoc:
   def self.start_session(binding)
+    ARGV << "--noinspect" unless ARGV.include?("--inspect")
     unless @__initialized
       args = ARGV
       ARGV.replace(ARGV.dup)
