@@ -7,6 +7,7 @@ class CpSession
                                 :site => "https://#{HOST}",
                                 :token_url => '/oauth/access_token'
                                 )
+
     @token = client.client_credentials.get_token.token
     @api_url = "https://#{HOST}/v1/"
     @auth = { 'Authorization' => "Bearer #{@token}" }

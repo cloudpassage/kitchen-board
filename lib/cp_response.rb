@@ -14,6 +14,7 @@ class CpResponse
   end
 
   def to_s
-    pretty
+    return pretty if @result.is_a? String
+    @result.inspect
   end
 end
