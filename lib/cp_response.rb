@@ -1,4 +1,5 @@
 class CpResponse
+
   def initialize
     @result = yield
   rescue => e
@@ -6,7 +7,8 @@ class CpResponse
   end
 
   def pretty
-    JSON.pretty_unparse(JSON.parse(@result))
+    json = JSON.pretty_unparse(JSON.parse(@result))
+    Pygments.highlight(json, :formatter => 'terminal', :lexer => 'json', :options => {:encoding => 'utf-8'})
   end
 
   def to_hash
