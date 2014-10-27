@@ -2,7 +2,6 @@ require 'rest-client'
 require 'oauth2'
 require 'json'
 require 'coderay'
-require 'term-ansicolors'
 
 module CpConfig
   CLIENTID = ENV['HALO_KEY_ID'] || "invalid"
