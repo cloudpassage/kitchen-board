@@ -17,5 +17,6 @@ cp = CpSession.new()
 puts " Now you can call cp.get and so on "
 puts "#{cp}"
 puts
+RestClient.log = 'stdout'
 
 IRB.start_session(binding)

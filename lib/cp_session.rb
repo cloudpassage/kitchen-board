@@ -9,24 +9,28 @@ class CpSession
                                 )
 
     @token = client.client_credentials.get_token.token
-    @api_url = "https://#{HOST}/v1/"
+    @api_url = "https://#{HOST}/"
     @auth = { 'Authorization' => "Bearer #{@token}" }
     @common = @auth.merge(accept: :json, content_type: :json)
   end
 
   def get(endpoint, params = {})
-    CpResponse.new { RestClient.get @api_url + "#{endpoint}", @common.merge(params: params) }
+    v = params[:version] || "1" 
+    CpResponse.new { RestClient.get @api_url + "v#{v}/#{endpoint}", @common.merge(params: params) }
   end
 
   def post(endpoint, params)
-    CpResponse.new { RestClient.post @api_url + "#{endpoint}", params, @common }
+    v = params[:version] || "1" 
+    CpResponse.new { RestClient.post @api_url + "v#{v}/#{endpoint}", params, @common }
   end
 
   def put(endpoint, params)
-    CpResponse.new { RestClient.put @api_url + "#{endpoint}", params, @common }
+    v = params[:version] || "1" 
+    CpResponse.new { RestClient.put @api_url + "v#{v}/#{endpoint}", params, @common }
   end
 
   def delete(endpoint)
-    CpResponse.new { RestClient.delete @api_url + "#{endpoint}", @common }
+    v = params[:version] || "1" 
+    CpResponse.new { RestClient.delete @api_url + "v#{v}/#{endpoint}", @common }
   end
 end
