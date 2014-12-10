@@ -10,24 +10,28 @@ class CpResponse
     JSON.parse(@result)
   end
 
-  def json
-    json = JSON.pretty_unparse(JSON.parse(@result))
+  def json(json)
+    JSON.pretty_unparse(JSON.parse(json))
   end
 
-  def highlighted
+  def highlighted(json)
     CodeRay.scan(json, :json)
-  end  
+  end
 
   def pretty
-    highlighted.terminal
+    highlighted(json(@result)).terminal
+  end
+
+  def pretty_error
+    highlighted(json(@result.http_body)).terminal
   end
 
   def to_s
     return pretty if @result.is_a? String
-    @result.inspect
+    pretty_error
   end
 
   def html
     puts CodeRay.scan(json, :json).div
-  end   
+  end
 end

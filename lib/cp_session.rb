@@ -1,3 +1,4 @@
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 class CpSession
   include CpConfig
 
@@ -5,7 +6,8 @@ class CpSession
     client = OAuth2::Client.new(CLIENTID,
                                 CLIENTSECRET,
                                 :site => "https://#{HOST}",
-                                :token_url => '/oauth/access_token'
+                                :token_url => '/oauth/access_token', 
+                                :ssl_verify => false
                                 )
 
     @token = client.client_credentials.get_token.token
