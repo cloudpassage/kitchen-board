@@ -1,4 +1,3 @@
-OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 class CpSession
   include CpConfig
   attr_accessor :version
