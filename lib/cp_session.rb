@@ -33,7 +33,7 @@ class CpSession
     CpResponse.new { RestClient.put @api_url + "v#{v}/#{endpoint}", params, @common }
   end
 
-  def delete(endpoint, params = {})
+  def delete(endpoint, params)
     v = params.delete(:version) || @version
     CpResponse.new { RestClient.delete @api_url + "v#{v}/#{endpoint}", @common }
   end
