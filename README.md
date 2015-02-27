@@ -26,9 +26,9 @@ available to you via the  CloudPassage admin view.
 
 These can be set in various ways, via .bashrc , via inline , etc. 
 ```
-export HALO_KEY_ID = 'xxxxx'
-export HALO_SECRET_KEY  = 'xxxxxxxxxxxx'
-export HALO_HOST = 'api.cloudpassage.com'
+export HALO_KEY_ID='xxxxx'
+export HALO_SECRET_KEY='xxxxxxxxxxxx'
+export HALO_HOST='api.cloudpassage.com'
 ```
 
 Launch locally as :
