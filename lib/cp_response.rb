@@ -27,7 +27,7 @@ class CpResponse
   end
 
   def to_s
-    return pretty if @error.nil? && @result
+    return pretty if @result
     return nil if @error.http_code == 404
     return nil if @error.http_code == 204
     return pretty_error if @error.http_code == 422

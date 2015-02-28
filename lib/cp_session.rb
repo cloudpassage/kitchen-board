@@ -2,15 +2,20 @@ class CpSession
   include CpConfig
   attr_accessor :version
 
-  def initialize
-    client = OAuth2::Client.new(CLIENTID,
-                                CLIENTSECRET,
-                                :site => "https://#{HOST}",
-                                :token_url => '/oauth/access_token',
-                                :ssl_verify => false
+  def get_authorized!
+    client = OAuth2::Client.new(
+        CLIENTID,
+        CLIENTSECRET,
+        :site => "https://#{HOST}",
+        :token_url => '/oauth/access_token'
     )
 
     @token = client.client_credentials.get_token.token
+  end
+
+
+  def initialize
+    get_authorized!
     @api_url = "https://#{HOST}/"
     @common = {
         accept: :json,
@@ -20,24 +25,26 @@ class CpSession
     @version = "1"
   end
 
-  def get(endpoint, params = {})
+  def cp_request(action, endpoint, params)
     v = params.delete(:version) || @version
-    CpResponse.new { RestClient.get @api_url + "v#{v}/#{endpoint}", @common.merge(params) }
+    RestClient.send(action, @api_url + "v#{v}/#{endpoint}", @common.merge(params: params))
+  end
+
+  def get(endpoint, params = {})
+    CpResponse.new { cp_request(:get, endpoint, params) }
   end
 
   def post(endpoint, params = {})
-    v = params.delete(:version) || @version
-    CpResponse.new { RestClient.post @api_url + "v#{v}/#{endpoint}", @common.merge(params) }
+    CpResponse.new { cp_request(:post, endpoint, params) }
   end
 
   def put(endpoint, params = {})
-    v = params.delete(:version) || @version
-    CpResponse.new { RestClient.put @api_url + "v#{v}/#{endpoint}", @common.merge(params) }
+    CpResponse.new { cp_request(:put, endpoint, params) }
   end
 
   def delete(endpoint, params = {})
-    v = params.delete(:version) || @version
-    CpResponse.new { RestClient.delete @api_url + "v#{v}/#{endpoint}", @common.merge(params) }
+    CpResponse.new { cp_request(:delete, endpoint, params) }
   end
+
 
 end
