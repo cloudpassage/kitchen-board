@@ -3,7 +3,7 @@ class CpResponse
   def initialize
     @result = yield
   rescue => e
-    @result = e
+    @error = e
   end
 
   def to_hash
@@ -23,12 +23,15 @@ class CpResponse
   end
 
   def pretty_error
-    highlighted(json(@result.http_body)).terminal
+    highlighted(@error.http_body).terminal
   end
 
   def to_s
-    return pretty if @result.is_a? String
-    pretty_error
+    return pretty if @error.nil? && @result
+    return nil if @error.http_code == 404
+    return nil if @error.http_code == 204
+    return pretty_error if @error.http_code == 422
+    @error.to_s
   end
 
   def html

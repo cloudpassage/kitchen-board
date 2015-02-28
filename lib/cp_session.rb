@@ -6,35 +6,37 @@ class CpSession
     client = OAuth2::Client.new(CLIENTID,
                                 CLIENTSECRET,
                                 :site => "https://#{HOST}",
-                                :token_url => '/oauth/access_token',
-                                :ssl_verify => false
-                                )
+                                :token_url => '/oauth/access_token'
+    )
 
     @token = client.client_credentials.get_token.token
     @api_url = "https://#{HOST}/"
-    @auth = { 'Authorization' => "Bearer #{@token}" }
-    @common = @auth.merge(accept: :json, content_type: :json)
+    @common = {
+        accept: :json,
+        content_type: :json,
+        'Authorization' => "Bearer #{@token}"
+    }
     @version = "1"
   end
 
   def get(endpoint, params = {})
     v = params.delete(:version) || @version
-    CpResponse.new { RestClient.get @api_url + "v#{v}/#{endpoint}", @common.merge(params: params) }
+    CpResponse.new { RestClient.get @api_url + "v#{v}/#{endpoint}", @common.merge(params) }
   end
 
-  def post(endpoint, params)
+  def post(endpoint, params = {})
     v = params.delete(:version) || @version
-    CpResponse.new { RestClient.post @api_url + "v#{v}/#{endpoint}", params, @common }
+    CpResponse.new { RestClient.post @api_url + "v#{v}/#{endpoint}", @common.merge(params) }
   end
 
-  def put(endpoint, params)
+  def put(endpoint, params = {})
     v = params.delete(:version) || @version
-    CpResponse.new { RestClient.put @api_url + "v#{v}/#{endpoint}", params, @common }
+    CpResponse.new { RestClient.put @api_url + "v#{v}/#{endpoint}", @common.merge(params) }
   end
 
-  def delete(endpoint)
+  def delete(endpoint, params = {})
     v = params.delete(:version) || @version
-    CpResponse.new { RestClient.delete @api_url + "v#{v}/#{endpoint}", @common }
+    CpResponse.new { RestClient.delete @api_url + "v#{v}/#{endpoint}", @common.merge(params) }
   end
 
 end

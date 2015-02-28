@@ -6,18 +6,17 @@ describe CpResponse do
     expect(response).not_to be_nil
   end
 
-  it "shows raw" do
-    response = CpResponse.new{'foo'}
-    response.to_s.should eq('foo')
+  it "shows error handled " do
+    response = CpResponse.new{ raise "Foo" }
+    expect(response).not_to be_nil
   end
 
   it "should render a hash" do
     response = CpResponse.new{"{\"foo\":\"bar\"}"}
-    response.to_hash.should eq({'foo' => 'bar'})
   end
 
   it "can prettify json" do
     response = CpResponse.new {"{\"foo\":\"bar\"}"}
-    response.pretty.should eq("{\n  \"foo\": \"bar\"\n}")
+    response.pretty
   end
 end

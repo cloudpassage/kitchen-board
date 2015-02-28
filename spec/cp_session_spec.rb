@@ -12,14 +12,13 @@ describe session = CpSession.new do
   end
 
   it "calls post " do
-    session.should_receive :get
+    session.should_receive :post
     session.post(:fim_policies, id:1)
   end
 
-  it "calls patch " do
-    session.should_receive :get
-    session.patch(:fim_policies, id:1)
+  it "calls delete " do
+    session.should_receive :delete
+    session.delete(:fim_policies, id:1)
   end
-
 
 end
