@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe session = CpSession.new do
+
   it "calls get " do
     session.should_receive :get
     session.get(:fim_policies)

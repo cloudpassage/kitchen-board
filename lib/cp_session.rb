@@ -13,7 +13,6 @@ class CpSession
     @token = client.client_credentials.get_token.token
   end
 
-
   def initialize
     get_authorized!
     @api_url = "https://#{HOST}/"
@@ -27,7 +26,11 @@ class CpSession
 
   def cp_request(action, endpoint, params)
     v = params.delete(:version) || @version
-    RestClient.send(action, @api_url + "v#{v}/#{endpoint}", @common.merge(params: params))
+    url = @api_url + "v#{v}/#{endpoint}"
+    payload = params
+    headers = @common
+    RestClient.send(action, url, payload, headers ) unless [:get, :delete].include?(action)
+    RestClient.send(action, url, headers )
   end
 
   def get(endpoint, params = {})
@@ -45,6 +48,5 @@ class CpSession
   def delete(endpoint, params = {})
     CpResponse.new { cp_request(:delete, endpoint, params) }
   end
-
 
 end
