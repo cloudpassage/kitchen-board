@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'json'
-gem 'rest-client'
+gem 'faraday'
 gem 'oauth2'
 gem 'awesome_print'
 gem 'rspec'

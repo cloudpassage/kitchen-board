@@ -1,13 +1,12 @@
 class CpResponse
+  attr_reader :result
 
   def initialize
     @result = yield
-  rescue => e
-    @error = e
   end
 
   def to_hash
-    JSON.parse(@result)
+    JSON.parse(@result.body)
   end
 
   def json(json)
@@ -19,19 +18,17 @@ class CpResponse
   end
 
   def pretty
-    highlighted(json(@result)).terminal
-  end
-
-  def pretty_error
-    highlighted(@error.http_body).terminal
+    highlighted(json(@result.body)).terminal
   end
 
   def to_s
-    return pretty if @result
-    return nil if @error.http_code == 404
-    return nil if @error.http_code == 204
-    return pretty_error if @error.http_code == 422
-    @error.to_s
+    return pretty if @result.status == 200
+    return nil if @result.status == 204
+    return pretty if @result.status == 422
+    return nil if @result.status == 404
+    return "created" if @result.status == 201
+    return "bad request" if @result.status == 400
+    highlighted(@result.body)
   end
 
   def html

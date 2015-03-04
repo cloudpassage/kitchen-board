@@ -17,8 +17,8 @@ class CpSession
     get_authorized!
     @api_url = "https://#{HOST}/"
     @common = {
-        accept: :json,
-        content_type: :json,
+        'Accept' =>  'json',
+        'Content-type' => 'json',
         'Authorization' => "Bearer #{@token}"
     }
     @version = "1"
@@ -27,10 +27,11 @@ class CpSession
   def cp_request(action, endpoint, params)
     v = params.delete(:version) || @version
     url = @api_url + "v#{v}/#{endpoint}"
-    payload = params
     headers = @common
-    RestClient.send(action, url, payload, headers ) unless [:get, :delete].include?(action)
-    RestClient.send(action, url, headers )
+    Faraday.send(action, url) do |request|
+      request.headers = headers
+      request.params = params
+    end
   end
 
   def get(endpoint, params = {})
