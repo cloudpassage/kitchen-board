@@ -22,13 +22,7 @@ class CpResponse
   end
 
   def to_s
-    return pretty if @result.status == 200
-    return nil if @result.status == 204
-    return pretty if @result.status == 422
-    return nil if @result.status == 404
-    return "created" if @result.status == 201
-    return "bad request" if @result.status == 400
-    highlighted(@result.body)
+    pretty   
   end
 
   def html
