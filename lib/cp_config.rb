@@ -1,10 +1,10 @@
-require 'rest-client'
+require 'faraday'
 require 'oauth2'
 require 'json'
 require 'coderay'
 
 module CpConfig
-  CLIENTID = ENV['HALO_KEY_ID'] || "invalid"
-  CLIENTSECRET = ENV['HALO_SECRET_KEY'] ||  "invalid"
+  CLIENT_ID = ENV['HALO_KEY_ID'] || "invalid"
+  CLIENT_SECRET = ENV['HALO_SECRET_KEY'] ||  "invalid"
   HOST = ENV['HALO_HOST'] || "invalid"
 end

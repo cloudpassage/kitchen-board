@@ -1,24 +1,27 @@
 require 'spec_helper'
 
-describe session = CpSession.new do
+describe session = CpSession do
+  before :each do
+    CpSession.any_instance.stub(:get_authorized).and_return({})
+  end
 
   it "calls get " do
-    session.should_receive :get
+    expect(session).to receive :get
     session.get(:fim_policies)
   end
 
   it "calls put " do
-    session.should_receive :put
+    expect(session).to receive :put
     session.put(:fim_policies, id:1)
   end
 
   it "calls post " do
-    session.should_receive :post
+    expect(session).to receive :post
     session.post(:fim_policies, id:1)
   end
 
   it "calls delete " do
-    session.should_receive :delete
+    expect(session).to receive :delete
     session.delete(:fim_policies, id:1)
   end
 

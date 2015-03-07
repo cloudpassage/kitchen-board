@@ -1,11 +1,11 @@
 class CpSession
   include CpConfig
-  attr_accessor :version
+  attr_accessor :version, :client_id , :client_secret, :host
 
-  def get_authorized!
+  def get_authorized!(host, client_id, client_secret)
     client = OAuth2::Client.new(
-        CLIENTID,
-        CLIENTSECRET,
+        CLIENT_ID,
+        CLIENT_SECRET,
         :site => "https://#{HOST}",
         :token_url => '/oauth/access_token'
     )
@@ -13,22 +13,29 @@ class CpSession
     @token = client.client_credentials.get_token.token
   end
 
-  def initialize
-    get_authorized!
-    @api_url = "https://#{HOST}/"
+  def initialize( version: 1,  host: HOST, client_id: CLIENT_ID, client_secret: CLIENT_SECRET )
+    get_authorized!(host, client_id, client_secret)
+    @api_url = "https://#{host}/"
     @common = {
         'Accept' =>  'json',
         'Content-type' => 'json',
         'Authorization' => "Bearer #{@token}"
     }
-    @version = "1"
+    @version = version
   end
 
   def cp_request(action, endpoint, params)
     v = params.delete(:version) || @version
     url = @api_url + "v#{v}/#{endpoint}"
     headers = @common
-    Faraday.send(action, url) do |request|
+
+    conn = Faraday.new(url: url) do |faraday|
+      faraday.request  :url_encoded             # form-encode POST params
+      faraday.response :logger                  # log requests to STDOUT
+      faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+    end
+
+    conn.send(action) do |request|
       request.headers = headers
       request.params = params
     end
