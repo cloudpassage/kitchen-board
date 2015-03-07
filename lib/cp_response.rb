@@ -18,11 +18,13 @@ class CpResponse
   end
 
   def pretty
+    return @result.status if @result.status == 204
+    return @result.status if @result.status >= 300
     highlighted(json(@result.body)).terminal
   end
 
   def to_s
-    pretty   
+    pretty
   end
 
   def html
