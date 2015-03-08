@@ -1,19 +1,15 @@
 #!/usr/bin/env ruby
-
 require 'awesome_print'
-
-$:<< File.join(File.dirname(__FILE__), './lib')
-
-require 'cp_config'
-require 'cp_response'
-require 'cp_session'
-require 'cp_irb.rb'
+require './lib/cp_config.rb'
+require './lib/cp_response.rb'
+require './lib/cp_session.rb'
+require './lib/cp_irb.rb'
 
 puts "CloudPassage API Ruby Command Line Interface"
 puts "********************************************"
 
 cp = CpSession.new()
-puts " Now you can call cp.get and so on "
+puts " Now you can call: cp.get , cp.post, cp.put, cp.delete "
 puts "#{cp}"
 puts
 

@@ -1,33 +1,39 @@
 class CpResponse
-  attr_reader :result
+  attr_reader :result, :status
 
   def initialize
-    @result = yield
+    @raw = yield
+    raise "!!! Implement body and status" unless (@raw.respond_to?(:body) && @raw.respond_to?(:status))
+    @result = @raw.body
+    @status = @raw.status
   end
 
   def to_hash
-    JSON.parse(@result.body)
+    JSON.parse(@result)
   end
 
-  def json(json)
-    JSON.pretty_unparse(JSON.parse(json))
+  def json
+    @result
   end
 
-  def highlighted(json)
-    CodeRay.scan(json, :json)
+  def formatted_json
+    JSON.pretty_unparse(self.to_hash)
   end
 
   def pretty
-    return @result.status if @result.status == 204
-    return @result.status if @result.status >= 300
-    highlighted(json(@result.body)).terminal
+    highlighted.terminal
+  end
+
+  def highlighted
+    CodeRay.scan(formatted_json, :json)
   end
 
   def to_s
-    pretty
+    return pretty unless [204, 404, 400, 500].include? @status
+    @status
   end
 
   def html
-    puts CodeRay.scan(json, :json).div
+    puts CodeRay.scan(formatted_json, :formatted_json).div
   end
 end
