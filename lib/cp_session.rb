@@ -18,17 +18,19 @@ class CpSession
     @api_url = "https://#{host}/"
     @common = {
         'Accept' => 'json',
-        'Content-type' => 'json',
+        'Content-type' => 'application/json',
         'Authorization' => "Bearer #{@token}"
     }
     @version = version
   end
 
   def cp_request(action, endpoint, params)
-    v = @version
-    url = @api_url + "v#{v}/#{endpoint}"
+    url = @api_url + "v#{@version}/#{endpoint}"
     headers = @common
-    params = JSON.parse(params) unless params.is_a? Hash
+    params_hash = {}
+    params_hash = params if params.is_a? Hash
+    body = ""
+    body = params if params.is_a? String
 
     conn = Faraday.new(url: url) do |faraday|
       faraday.response :logger
@@ -37,7 +39,8 @@ class CpSession
 
     conn.send(action) do |request|
       request.headers = headers
-      request.params = params
+      request.params = params_hash
+      request.body = body
     end
   end
 
