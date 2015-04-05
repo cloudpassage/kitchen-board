@@ -31,7 +31,7 @@ class CpSession
     body = params if params.is_a? String
 
     conn = Faraday.new(url: url) do |faraday|
-      faraday.response :logger
+      faraday.response :detailed_logger
       faraday.adapter Faraday.default_adapter
     end
 
@@ -56,6 +56,19 @@ class CpSession
 
   def delete(endpoint, params = {})
     CpResponse.new { cp_request(:delete, endpoint, params) }
+  end
+
+  def with_stdout_to_color
+    begin
+      old_stdout = $stdout
+      $stdout = StringIO.new('', 'w')
+      result = yield
+      color = CodeRay.scan($stdout.string, :ruby)
+      result
+    ensure
+      $stdout = old_stdout
+      puts color.terminal
+    end
   end
 
 end

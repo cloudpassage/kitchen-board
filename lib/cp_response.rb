@@ -30,10 +30,11 @@ class CpResponse
 
   def to_s
     return pretty unless [204, 404, 400, 500].include? @status
-    @status
+    @status << @result[0..20]
   end
 
   def html
     puts CodeRay.scan(formatted_json, :formatted_json).div
   end
+
 end

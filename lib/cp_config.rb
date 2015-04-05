@@ -1,5 +1,6 @@
 require 'awesome_print'
 require 'faraday'
+require 'faraday/detailed_logger'
 require 'oauth2'
 require 'json'
 require 'coderay'
