@@ -16,8 +16,8 @@ class CpSession
   def initialize(version: 1, host: HOST, client_id: CLIENT_ID, client_secret: CLIENT_SECRET)
     get_authorized!(host, client_id, client_secret)
     @api_url = "https://#{host}/"
-    @common = {
-        'Accept' => 'json',
+    @headers = {
+        'X-Accept' => 'application/json',
         'Content-type' => 'application/json',
         'Authorization' => "Bearer #{@token}"
     }
@@ -26,10 +26,8 @@ class CpSession
 
   def cp_request(action, endpoint, params)
     url = @api_url + "v#{@version}/#{endpoint}"
-    headers = @common
-    params_hash = {}
+    headers = @headers
     params_hash = params if params.is_a? Hash
-    body = ""
     body = params if params.is_a? String
 
     conn = Faraday.new(url: url) do |faraday|
@@ -39,12 +37,12 @@ class CpSession
 
     conn.send(action) do |request|
       request.headers = headers
-      request.params = params_hash
-      request.body = body
+      request.params = params_hash if params_hash
+      request.body = body if body
     end
   end
 
-  def get(endpoint, params = {})
+  def get(endpoint, params = nil)
     CpResponse.new { cp_request(:get, endpoint, params) }
   end
 

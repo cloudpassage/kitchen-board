@@ -1,3 +1,4 @@
+require 'awesome_print'
 require 'faraday'
 require 'oauth2'
 require 'json'
