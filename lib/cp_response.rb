@@ -29,8 +29,8 @@ class CpResponse
   end
 
   def to_s
-    return pretty unless [204, 404, 400, 500].include? @status
-    @status << @result[0..20]
+    return pretty unless [204, 404, 400, 500].include? @status.to_i
+    @status = @result[0..2]
   end
 
   def html
