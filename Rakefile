@@ -14,6 +14,7 @@ task :console do
 
   puts "CloudPassage API Ruby Command Line Interface"
   puts "********************************************"
+  puts
   cp = CpSession.new()
   puts " Now you can call: cp.get , cp.post, cp.put, cp.delete "
   puts "#{cp}"

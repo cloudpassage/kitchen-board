@@ -1,5 +1,2 @@
-
-
 module HaloApiConsole
-
 end
