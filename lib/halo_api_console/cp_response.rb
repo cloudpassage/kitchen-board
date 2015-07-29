@@ -3,9 +3,12 @@ class CpResponse
 
   def initialize
     @raw = yield
-    raise "!!! Implement body and status" unless (@raw.respond_to?(:body) && @raw.respond_to?(:status))
+    raise "!!! Implement body and status" unless (@raw.respond_to?(:body) &&
+     @raw.respond_to?(:status))
+
     @result = @raw.body
     @status = @raw.status
+    puts self
   end
 
   def to_hash
