@@ -1,4 +1,5 @@
-require 'spec_helper'
+require_relative '../lib/halo_api_console/cp_config.rb'
+require_relative '../lib/halo_api_console/cp_session.rb'
 
 describe session = CpSession do
   before :each do

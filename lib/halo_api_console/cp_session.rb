@@ -51,7 +51,7 @@ class CpSession
   end
 
   def get(endpoint, params = nil)
-    CpResponse.new { cp_request(:get, endpoint, params) }
+    CpResponse.new { cp_request(:get, endpoint, params ) }
   end
 
   def post(endpoint, params = {})
@@ -64,19 +64,6 @@ class CpSession
 
   def delete(endpoint, params = {})
     CpResponse.new { cp_request(:delete, endpoint, params) }
-  end
-
-  def with_stdout_to_color
-    begin
-      old_stdout = $stdout
-      $stdout = StringIO.new('', 'w')
-      result = yield
-      color = CodeRay.scan($stdout.string, :ruby)
-      result
-    ensure
-      $stdout = old_stdout
-      puts color.terminal
-    end
   end
 
 end

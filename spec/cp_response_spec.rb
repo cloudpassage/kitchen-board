@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../lib/halo_api_console/cp_response.rb'
 
 describe CpResponse do
   before :all do

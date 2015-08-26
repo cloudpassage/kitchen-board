@@ -8,7 +8,6 @@ class CpResponse
 
     @result = @raw.body
     @status = @raw.status
-    puts self
   end
 
   def to_hash
@@ -34,6 +33,10 @@ class CpResponse
   def to_s
     return pretty unless [204, 404, 400, 500].include? @status.to_i
     @status = @result[0..2]
+  end
+
+  def inspect
+    to_s
   end
 
   def html
