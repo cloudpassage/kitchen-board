@@ -73,3 +73,7 @@ cp.post "fim_policies", my_json_policy
 
 ###*Output*
 A response object that is by default showing the json version, but can be made into a Ruby Hash by the .to_hash method
+
+<!---
+#CPTAGS:community-unsupported audit
+-->
