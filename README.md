@@ -24,7 +24,7 @@ HALO_HOST = 'api.cloudpassage.com'
 
 Launch locally as :
 
-`rake console`
+`bin/console`
 
 If all is set up correctly you will see the following prompt
 
@@ -46,11 +46,11 @@ Use `to_hash` to get the response into a Ruby hash format.
 
 ```ruby
 
-cp.get(:fim_policies)
+get(:fim_policies)
 
-cp.get(:groups).to_hash
+get(:groups).to_hash
 
-cp.get "fim_policies/{id}"
+get "fim_policies/{id}"
 
 
 ```
@@ -60,7 +60,7 @@ this will be handled by RestClient and submitted the right way
 
 
 ```ruby
-cp.put "group/{id}", "{group:{name:"load balancers"}}"
+put "group/{id}", "{group:{name:"load balancers"}}"
 ```
 
 Given a correctly formatted json file of a file integrity policy "file.json" you could execute
@@ -68,7 +68,7 @@ Given a correctly formatted json file of a file integrity policy "file.json" you
 ```ruby
 my_json_policy = File.read("file.json")
 
-cp.post "fim_policies", my_json_policy
+post "fim_policies", my_json_policy
 ```
 
 ###*Output*
