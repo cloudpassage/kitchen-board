@@ -76,4 +76,5 @@ A response object that is by default showing the json version, but can be made i
 
 <!---
 #CPTAGS:community-unsupported audit
+#TBICON:images/ruby_icon.png
 -->
