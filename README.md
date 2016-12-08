@@ -5,6 +5,9 @@ Ruby console with a CloudPassage api session going
 ##Requirements and Dependencies
 Ruby > 2.0 , most often tested on Ruby 2.2.2
 
+Make sure you have bundler installed first:
+`gem install bundler`
+
 Run bundle install, it should dependencies by this app
 
 ##Installation
