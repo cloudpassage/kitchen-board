@@ -5,7 +5,10 @@ Ruby console with a CloudPassage api session going
 ##Requirements and Dependencies
 Ruby > 2.0 , most often tested on Ruby 2.2.2
 
-Run bundle install, it should dependencies by this app 
+Make sure you have bundler installed first:
+`gem install bundler`
+
+Run bundle install, it should dependencies by this app
 
 ##Installation
 Clone, download, or fork the git repo, then configure as below.
@@ -14,7 +17,7 @@ Clone, download, or fork the git repo, then configure as below.
 You need to provide three ENV variables for your account, with the user specific api credentials
 available to you via the  CloudPassage admin view.
 
-These can be set in various ways, via .bashrc , via inline , etc. 
+These can be set in various ways, via .bashrc , via inline , etc.
 
 ```
 HALO_KEY_ID = 'xxxxx'
@@ -29,18 +32,12 @@ Launch locally as :
 If all is set up correctly you will see the following prompt
 
 
-```               
+```
 CloudPassage API Ruby Command Line Interface
 ********************************************
 ```
 
 ##Usage
-
-Running `rake console` will create an IRB session with a `cp` object with the API session token embedded.
-A command prompt appears so you can fire requests.
-The responses are shown by default in  json format, it also responds to .to_hash and .json for transport.
-Use `to_hash` to get the response into a Ruby hash format.
-
 
 ###*Example Commands*
 
